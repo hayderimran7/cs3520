@@ -8,7 +8,8 @@ import java.util.ArrayList;
 public class Common {
 	public void initDB(Statement stmt) throws Exception {
 
-		String query = "drop database if exists bookstore;"
+		String query = "SET GLOBAL sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''));"
+                                + "drop database if exists bookstore;"
 				+ "create database bookstore;"
 				+ "use bookstore";
 		try {
