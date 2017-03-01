@@ -5,7 +5,8 @@ body {
     line-height: 18px;
     font-family: arial, sans-serif;
     color: #383838;
-    background: #3b3b3b url(../resource/body.png);
+    background: #3b3b3b url(../resource/background3.jpg);
+    background-size: cover;
 }
 
 a { color: #0252aa; text-decoration: none; cursor: pointer; }

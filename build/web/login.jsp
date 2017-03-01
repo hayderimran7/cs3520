@@ -9,7 +9,7 @@
     <script src="./js/bootstrap.min.js" type="text/javascript"></script>
 </head>
 
-<body style="background: #eee url('resource/login_bg.png') repeat scroll 0% 0%">
+<body style="background: #eee url('resource/homeBG.png') repeat scroll 0% 0%">
 	
 	<div class="container">
 	   <div class="login-container">
