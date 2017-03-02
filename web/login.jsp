@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<title> Welcome | BookStore of Liang </title>
+	<title> Welcome | CS3520 BookStore </title>
 	<link rel="stylesheet" type="text/css" href="./css/bootstrap.min.css" id="bootstrap-css" />
     <link rel="stylesheet" type="text/css" href="./css/login.css" />
     <script src="./js/jquery-1.10.2.min.js" type="text/javascript"></script>

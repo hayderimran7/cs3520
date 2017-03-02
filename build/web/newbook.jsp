@@ -2,7 +2,7 @@
 <%@ page language="java" import="fudandb.*, java.sql.*" %>
 <html lang="en-US" xmlns="http://www.w3.org/1999/xhtml" dir="ltr">
 <head>
-	<title> Add Book | BookStore of Liang </title>
+	<title> Add Book | CS3520 BookStore </title>
 	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 	<link rel="shortcut icon" href="css/images/favicon.ico" />
 	<link rel="stylesheet" href="css/style.css" type="text/css" media="all" />
@@ -49,7 +49,7 @@
 	%>
 	<!-- Header -->
 	<div id="header" class="shell">
-		<div id="logo"><h1><a href="#">BestSeller</a></h1><span><a href="http://www.lyq.me">Designed by Liang Yongqing</a></span></div>
+		<div id="logo"><h1><a href="#">BestSeller</a></h1><span><a href="http://github.com/hayderimran7/cs3520">Designed by Imran Malik / Maiar Khattab </a></span></div>
 		<!-- Navigation -->
 		<div id="navigation">
 			<ul>
@@ -168,26 +168,23 @@
 			<div class="cnt">
 				<div class="col about">
 					<h4>About Me</h4>
-					<p>Name : Liang Yongqing </p>
-					<p>NO : 13307130254 </p>
-					<p>HomePage : http://www.lyq.me </p>
-					<p>Mail : 13307130254@fudan.edu.cn / root@lyq.me </p>
-					<p>Skill : Computer Vision & Graphics</p>
+					<p>Name : Imran Malik / Maiar Khattab </p>
+					<p>NO : wm6952 </p>
+					<p>HomePage : https://github.com/hayderimran7/cs3520 </p>
+					<p>Mail : muhammad.malik@csueb.edu /  </p>
+					<p>Skill : Web Development </p>
 
 				</div>
 				
 				<div class="col" id="newsletter">
 					<h4>About Website</h4>
 					<p>BUILT FOR ALL FUNCTIONALITY !! </p>
-					<p>If you can NOT find ANY functionality. Please Contact Me :)</p>
-					<p>If you want to MINUS MY SCORE. Please Contact Me :(</p>
-					<br/>
-					<p>Amazing database class !! Inspired me many ideas.</p>
-					<p>Thanks Feifei a lot !!</p>
+					<p>CS 3520 Course project </p>
+
 				</div>
 				<div class="cl">&nbsp;</div>
 				<div class="copy">
-					<p>&copy; <a href="#">BestSeller.com</a>. Design by <a href="http://www.lyq.me/">Liang Yongqing</a></p>
+					<p>&copy; <a href="#">Bookstore</a>. Design by <a href="https://github.com/hayderimran7/cs3520"> Imran Malik / Maiar Khattab </a></p>
 				</div>
 			</div>
 		</div>
