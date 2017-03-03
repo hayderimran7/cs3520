@@ -23,13 +23,13 @@ $('#btn_register').click(function(e) {
         "display":"none"
     });
     $(".avatar").css({
-        "background-image": "url('resource/register.gif')"
+        "background-image": "url('img/the-book.gif')"
     });
 });
 
 $('#btn_cancel').click(function(e) {
     e.preventDefault();
-    location.href = "index.html";
+    location.href = "login.jsp";
 });
 
 function checkRegister() {
@@ -37,7 +37,6 @@ function checkRegister() {
     var itemfield1 = $('input[name=loginname_r]');
     var itemfield2 = $('input[name=password_r]');
     var itemfield3 = $('input[name=fullname_r]');
-    var itemfield4 = $('input[name=address_r]');
     var itemfield5 = $('input[name=phone_r]');
     if (itemfield1.val() == "" || itemfield2.val() == "" || 
         itemfield3.val() == "" || itemfield4.val() == "" || itemfield5.val() == "" ) {

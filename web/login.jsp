@@ -1,4 +1,11 @@
-<%@ page language="java" import="fudandb.*" %>
+<%-- 
+    Document   : login
+    Created on : Mar 2, 2017, 9:38:47 PM
+    Author     : imalik
+--%>
+
+<%@page language="java" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 <html>
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -9,83 +16,38 @@
     <script src="./js/bootstrap.min.js" type="text/javascript"></script>
 </head>
 
-<body style="background: #eee url('resource/homeBG.png') repeat scroll 0% 0%">
+<body style="background: #eee url('img/homeBG.jpg') repeat scroll 0% 0%; background-size: cover;">
 	
-	<div class="container">
+
+    <div class="container">
 	   <div class="login-container">
             <div id="output"></div>
-            <div class="avatar" style="background-image: url('resource/login_man.jpeg')"></div>
-        </div>
+            <div class="avatar"></div>
+            <div class="form-box">
+                <form id="form_login" action="login.jsp" method="POST">
+                    <input name="loginname" type="text" placeholder="Login Name">
+                    <input name="password" type="password" placeholder="Password">
+                    <button id="btn_login" class="btn btn-info btn-block login" type="submit" onclick="return checkLogin()">Login</button>
+                    <button id="btn_register" class="btn btn-info btn-block login" type="submit">Register</button>
+                </form>
+
+                <form id="form_register" action="register.jsp" method="POST">
+                    <input name="loginname_r" type="text" placeholder="Login Name">
+                    <input name="password_r" type="text" placeholder="Password">
+                    <input name="fullname_r" type="text" placeholder="Full Name">
+                    <input name="phone_r" type="text" placeholder="Phone Num">
+                    <button id="btn_confirm" class="btn btn-info btn-block login" type="submit" onclick="return checkRegister()">Confirm</button>
+                    <button id="btn_cancel" class="btn btn-info btn-block login" type="submit">Cancel</button>
+                </form>
+                <br/>
+                <label>Admin username : root</label>
+                <label>Admin password : root</label>
+                <br/>
+                <label>Client username : cs3520</label>
+                <label>Client password : cs3520</label>
+            </div>
+        </div>       
     </div>
-    <%
-		Cookie[] cookies = request.getCookies();
-        String cookiename="";
-        if (cookies != null) {
-        	for (int i = 0; i < cookies.length; i++) {
-				Cookie cookie = cookies[i];
-				
-				if (cookie.getName().equals("loginname")) {
-					cookiename = cookie.getValue();
-					break;
-				}
-			}
-		}
-		
-		if (!cookiename.equals("") ) {
-    %>
-    	<script type="text/javascript">
-			var name = <%= "'" + cookiename + "'" %>;
-			$("#output").addClass("alert alert-success animated fadeInUp").html("Welcome Back " + "<span style='text-transform:uppercase'>" + name + "</span>");
-        	$("#output").removeClass(' alert-danger');
-        	
-        	var date = new Date();
-        	var expiresMin = 60;
-        	date.setTime(date.getTime()+expiresMin*60*1000);
-        	document.cookie = "expires="+date.toGMTString();
-        	document.cookie = "loginname=" + name;
-        	function jmp() {
-        		location.href = "home.jsp";
-			}
-			setTimeout("jmp()", 1500);
-		</script>
-    <% } else { 
-		fudandb.Connector con = new Connector();
-		fudandb.Customer customers = new Customer();
-		String loginname = (String)request.getParameter("loginname");
-		String password = (String)request.getParameter("password");
-		if (loginname == null || password == null) {
-	%>
-		<script type="text/javascript">alert("Illegal EMPTY Loginname or Password !!");</script>
-		<script type="text/javascript">location.href = "index.html";</script>
-	<%
-		} else {
-			Boolean match = customers.loginCustomer(loginname, password, con.stmt);
-			if (match) {
-	%>
-			<script type="text/javascript">
-				var name = <%= "'" + loginname + "'" %>;
-				$("#output").addClass("alert alert-success animated fadeInUp").html("Welcome Back " + "<span style='text-transform:uppercase'>" + name + "</span>");
-	        	$("#output").removeClass(' alert-danger');
-	        	
-	        	var date = new Date();
-	        	var expiresMin = 60;
-	        	date.setTime(date.getTime()+expiresMin*60*1000);
-	        	document.cookie = "expires="+date.toGMTString();
-	        	document.cookie = "loginname=" + name;
-	        	function jmp() {
-	        		location.href = "home.jsp";
-				}
-				setTimeout("jmp()", 3000);
-			</script>
-	<% 
-			} else { %>
-			<script type="text/javascript">alert("Wrong Loginname or Password !!");</script>
-			<script type="text/javascript">location.href = "index.html";</script>
-	<% 		} 
-		}
-		con.closeConnection();
-	}
-	%>
-	
+    <script src="./js/login.js" type="text/javascript"></script>
 </body>
 </html>
