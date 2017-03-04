@@ -14,7 +14,12 @@ registration and order checkout.
 
 3. Create a Project in Netbeans
 
-4. 
+4. Copy all files to that Netbeans project workspace.
+
+5. Run the project 
+
+# NOTE: this is just skeleton project for now...coming soon, mysql integration
+
 
 ## TODO
 
