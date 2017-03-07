@@ -30,8 +30,8 @@
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav navbar-right">
         <li><a href="#about">ABOUT</a></li>
-        <li><a href="#top_sellers">TOP SELLERS</a></li> 
-        <li><a href="./browsebooks.jsp#">BROWSE </a></li> 
+        <li><a href="./index.jsp">TOP SELLERS</a></li> 
+        <li><a href="#browse">BROWSE </a></li> 
 
         <li><a href="#quotes">QUOTES</a></li> 
 <%
@@ -75,9 +75,9 @@
 </div>
 
 <!-- Container (BROWSE Section) -->
-<div id="top_sellers" class="container-fluid text-center bg-grey">
-  <h2>Browse</h2><br>
-  <h4>Our Top Sellers</h4>
+<div id="browse" class="container-fluid text-center bg-grey">
+  <h2>Product Catalog</h2><br>
+  <h4>All books in catalog</h4>
   <div class="row text-center slideanim">
     <div class="row">
   	<% 
@@ -87,7 +87,7 @@
 		String query;
                 ResultSet output;
 
-		query = "select * from book limit 3";
+		query = "select * from book";
 		System.out.println(query);
 
 		try {

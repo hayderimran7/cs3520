@@ -30,8 +30,8 @@
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav navbar-right">
         <li><a href="#about">ABOUT</a></li>
-        <li><a href="#top_sellers">TOP SELLERS</a></li> 
-        <li><a href="./browsebooks.jsp#">BROWSE </a></li> 
+        <li><a href="./index.jsp">TOP SELLERS</a></li> 
+        <li><a href="./browsebooks.jsp">BROWSE </a></li> 
 
         <li><a href="#quotes">QUOTES</a></li> 
 <%
@@ -73,21 +73,23 @@
     </div>
   </div>
 </div>
-
-<!-- Container (BROWSE Section) -->
-<div id="top_sellers" class="container-fluid text-center bg-grey">
-  <h2>Browse</h2><br>
-  <h4>Our Top Sellers</h4>
-  <div class="row text-center slideanim">
-    <div class="row">
-  	<% 
+<h3>Book Detail : </h3>
+<table border="1">
+<tr>
+    <th>ISBN</th>
+    <th>Title</th>
+    <th>Author</th>
+   <th>Publish_Year</th>
+   </tr>
+	<%
 		cs3520.dbconnector con = new dbconnector();
 		cs3520.book books = new book();
 		cs3520.util inst = new util();
 		String query;
                 ResultSet output;
+                String ISBN = request.getParameter("ISBN");
 
-		query = "select * from book limit 3";
+		query = "select * from book where ISBN="+  (String)request.getParameter("ISBN")+";" ;
 		System.out.println(query);
 
 		try {
@@ -97,41 +99,55 @@
 			System.err.println(e.getMessage());
 			throw (e);
 		}
-                int count=1;
-                while (output.next()) {
-                    String img_href = "img/hp" + count + ".jpg";
-                    String ISBN = output.getString("ISBN");
-                    String href = "'onebook.jsp?ISBN=" + ISBN + "'"; 
-                    String author = output.getString("author");
-                    String title = output.getString("title");
+                output.next();
 
-	%>
-  <div class="col-md-4">
-    <div class="thumbnail">
-      <a href=<%=img_href%>>
-        <img src=<%=img_href%> alt="book_image" style="width:50%">
-      </a>
-      <a href=<%=href%>>
-        <div class="caption">
-          <p><%=title%></p>
-        </div>
-        <div class="caption">
-          <p>Author <%=author%></p>
-        </div>
-        <div class="caption">
-          <p>ISBN <%=ISBN%></p>
-        </div>
-      </a>
-    </div>
-  </div>
-          <% 
-}
-              %>
+			%>
+			<tr>
+				<th><%=output.getString("ISBN")%></th>
+				<th><%=output.getString("title")%></th>
+				<th><%=output.getString("author")%></th>
+				<th><%=output.getString("publish_year")%></th>
 
-</div>
-</div>
-</div>
+			</tr>
+			
+		</table>
+		<br/>
+		<br/>
+<%
+    if ((session.getAttribute("userid") == null) || (session.getAttribute("userid") == "")) {
+%>
+<h3>Login to make an order on this book </h3>
+
+<% } else  {
+%>
+		<h3>New Order : </h3>
+			<script type="text/javascript">
+                            function checkOrder()
+                            {
+                              var x=document.forms["order_form"]["order_copies"].value;
+                                      if (isNaN(x)) 
+                                    {
+                                    alert("Must input numbers");
+                                        return false;
+                                          }
+                                      if ((x ==0) || (x < 0) || (x > 20) ) 
+                                    {
+                                    alert("Must input positive numbers between 0 and 20");
+                                        return false;
+                                          }
+                              };
+			</script>
+		<form name="order_form" action="cart.jsp" onsubmit="return checkOrder()" method="POST">
+			<input type="hidden" name="ISBN" value=<%=ISBN%> />
+			<input name="order_copies" id="order_copies" value="0">
+			<button type="submit" id="order_btn">Submit</button>
+
+                </form>
+
   <br>
+  
+  <% } 
+%>
  <div id="quotes" class="container-fluid text-center bg-grey"> 
   <h2>Why you should read books</h2>
  <div class="container">

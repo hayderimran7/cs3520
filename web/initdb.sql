@@ -1,3 +1,13 @@
+/* 
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+/**
+ * Author:  imalik
+ * Created: Mar 5, 2017
+ */
+
 # set global options
 SET GLOBAL sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''));
 # create database 
@@ -73,10 +83,10 @@ insert into users (
 # initialize orders
 insert into orders (
 	oid, ISBN, cid, buy_date, amount) values (
-( select count(*) from orders as ord ) + 1,'0590353403', '1', '2017', '1');
+( select count(*) from orders as ord ) + 1,'0590353403', 1, '2017', 1);
 insert into orders (
 	oid, ISBN, cid, buy_date, amount) values (
-( select count(*) from orders as ord ) + 1,'0545010225', '2', '2017', '2');
+( select count(*) from orders as ord ) + 1,'0545010225', 2, '2017', 2);
 insert into orders (
 	oid, ISBN, cid, buy_date, amount) values (
-( select count(*) from orders as ord ) + 1,'0439784549', '3', '2017', '9');
+( select count(*) from orders as ord ) + 1,'0439784549', 3, '2017', 9);

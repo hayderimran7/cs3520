@@ -30,8 +30,8 @@
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav navbar-right">
         <li><a href="#about">ABOUT</a></li>
-        <li><a href="#top_sellers">TOP SELLERS</a></li> 
-        <li><a href="./browsebooks.jsp#">BROWSE </a></li> 
+        <li><a href="./index.jsp">TOP SELLERS</a></li> 
+        <li><a href="./browsebooks.jsp">BROWSE </a></li> 
 
         <li><a href="#quotes">QUOTES</a></li> 
 <%
@@ -74,64 +74,80 @@
   </div>
 </div>
 
-<!-- Container (BROWSE Section) -->
-<div id="top_sellers" class="container-fluid text-center bg-grey">
-  <h2>Browse</h2><br>
-  <h4>Our Top Sellers</h4>
-  <div class="row text-center slideanim">
-    <div class="row">
-  	<% 
+<%
+    if ((session.getAttribute("userid") == null) || (session.getAttribute("userid") == "")) {
+%>
+<h3>Empty Cart: Nothing to show for Non-logged-in Users </h3>
+<script type="text/javascript">alert("Please Login First !!");location.href = "index.jsp";</script>
+<%
+     }
+
+		String username = (String) session.getAttribute("userid");
+                String qname = "'" + username + "'"; 
 		cs3520.dbconnector con = new dbconnector();
 		cs3520.book books = new book();
-		cs3520.util inst = new util();
-		String query;
-                ResultSet output;
 
-		query = "select * from book limit 3";
-		System.out.println(query);
+		cs3520.users user = new users();
+		cs3520.orders order = new orders();
+		int cid = user.get_cid(qname, con.stmt);
 
-		try {
-		 output = con.stmt.executeQuery(query);
-		} catch (Exception e) {
-			System.err.println("Unable to execute query:" + query + "\n");
-			System.err.println(e.getMessage());
-			throw (e);
-		}
-                int count=1;
-                while (output.next()) {
-                    String img_href = "img/hp" + count + ".jpg";
-                    String ISBN = output.getString("ISBN");
-                    String href = "'onebook.jsp?ISBN=" + ISBN + "'"; 
-                    String author = output.getString("author");
-                    String title = output.getString("title");
-
+		String ISBN = (String)request.getParameter("ISBN");
+		if (ISBN != null && !ISBN.equals("")) {
+			ISBN = "'" + ISBN + "'";
+			String[] order_value = new String[] {ISBN, String.valueOf(cid), (String)request.getParameter("order_copies")};
+			boolean order_succ = order.new_orders(order_value, con.stmt);
+			if (order_succ) {
 	%>
-  <div class="col-md-4">
-    <div class="thumbnail">
-      <a href=<%=img_href%>>
-        <img src=<%=img_href%> alt="book_image" style="width:50%">
-      </a>
-      <a href=<%=href%>>
-        <div class="caption">
-          <p><%=title%></p>
-        </div>
-        <div class="caption">
-          <p>Author <%=author%></p>
-        </div>
-        <div class="caption">
-          <p>ISBN <%=ISBN%></p>
-        </div>
-      </a>
-    </div>
-  </div>
-          <% 
-}
-              %>
+			<script type="text/javascript">
+				alert("New Order Successful !! ");
+			</script>
+	<%
+			} else {
+	%>
+			<script type="text/javascript">
+				alert("Order didnt proceed !! ");
+			</script>
+	<%
+			}
+	%>
+			<script type="text/javascript">
+				location.href="onebook.jsp?ISBN=" + <%=ISBN%>;
+			</script>
+	<%
+		}
+	%>
+	<div id="main" class="shell">
+		
+		<h3>My Orders : </h3>
+		<table border="1">
+			<tr>
+				<th>Order ID</th>
+				<th>Date</th>
+				<th>ISBN</th>
+				<th>Amount</th>
+			</tr>
+		<%
+			ResultSet results;
+			results = order.show_orders(cid, con.stmt);
+			while (results.next()) {
+		%>
+			<tr>
+				<th><%=results.getInt("oid")%></th>
+				<th><%=results.getString("buy_date")%></th>
+				<th><%=results.getString("ISBN")%></th>
+				<th><%=results.getInt("amount")%></th>
+			</tr>
+		<%
+			}
+		%>
+		</table>
+		
+		<%
+			con.closeConnection();
+		%>
 
-</div>
-</div>
-</div>
-  <br>
+	</div>
+
  <div id="quotes" class="container-fluid text-center bg-grey"> 
   <h2>Why you should read books</h2>
  <div class="container">

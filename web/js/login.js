@@ -34,14 +34,15 @@ $('#btn_cancel').click(function(e) {
 
 function checkRegister() {
 
-    var itemfield1 = $('input[name=loginname_r]');
-    var itemfield2 = $('input[name=password_r]');
-    var itemfield3 = $('input[name=fullname_r]');
-    var itemfield5 = $('input[name=phone_r]');
+    var itemfield1 = $('input[name=loginname]');
+    var itemfield2 = $('input[name=password]');
+    var itemfield3 = $('input[name=fullname]');
+    var itemfield5 = $('input[name=phone]');
     if (itemfield1.val() == "" || itemfield2.val() == "" || 
         itemfield3.val() == "" || itemfield4.val() == "" || itemfield5.val() == "" ) {
-        $("#output").removeClass(' alert alert-success');
-        $("#output").addClass("alert alert-danger animated fadeInUp").html("Please Enter ALL Items !!");
+        $("#form_register").removeClass(' alert alert-success');
+        $("#for_register").addClass("alert alert-danger animated fadeInUp").html("Please Enter ALL Items !!");
+        alert("Please Enter all items");
         return false;
     }
     return true;
